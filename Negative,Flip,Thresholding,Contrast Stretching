@@ -1,0 +1,63 @@
+Negative image, Flip, Thresholding, Contrast Stretching
+
+a. Obtain Negative image
+im=imread("drape.jpg");
+gim=rgb2gray(im)
+ngim(:,:)=255-gim(:,:)
+subplot(2,1,1)
+imshow(gim)
+subplot(2,1,2)
+imshow(ngim)
+
+b. Obtain Flip image
+(Flip by function)
+im= imread("C:\Users\CSLab\Documents\colours.jpg");
+subplot(1,2,1)
+imshow(im)
+size(im) 
+y=flipdim(im,2,10);
+subplot(1,2,2)
+imshow(y)
+
+(Flip by loop)
+im=imread("C:\Users\CSLab\Documents\drape.jpg");
+x=size(im);
+M=y(1)
+N=x(2);
+flip=zeros(M,N,3,'uint8');
+for i=1:M
+    flip(:,i,:)= im(:,M-i+1,:)
+end
+imwrite(flip,"flipped.png");
+be=imread("flipped.png");
+subplot(2,1,1);
+imshow(im);
+subplot(2,1,2)
+imshow(be)
+
+c. Thresholding
+originalImage = imread('path_to_your_image.jpg');
+if ndims(originalImage) == 3
+    grayImage = rgb2gray(originalImage);
+else
+    grayImage = originalImage;
+end
+subplot(1, 2, 1);
+imshow(originalImage);
+title('Original Image');
+subplot(1, 2, 2);
+imshow(grayImage);
+title('Grayscale Image');
+threshold = 128;
+binaryImage = grayImage > threshold;
+figure;
+imshow(binaryImage);
+title('Binary Image after Thresholding');
+imwrite(binaryImage, 'path_to_save_binary_image.png'); % Replace 'path_to_save_binary_image.png' with the desired save path and filename
+
+d. Contrast stretching
+I =imread("C:\Users\CSLab\Documents\blackandwhite2.jpg");
+J = imadjust(I,[0 0.5],[0 1]);
+imshow(I)
+figure();
+imshow(J);
