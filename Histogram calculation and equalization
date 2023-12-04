@@ -1,0 +1,29 @@
+ Histogram calculation and equalization
+
+//Part A (With Matlab) 
+ima=imread("C:\Users\CSLab\Downloads\img1.jpg")
+imb=rgb2gray(ima) 
+[count, cells]=imhist(imb) 
+subplot(2, 2, 1) 
+bar(cells, count) 
+title('Before equalization') 
+imc=imhistequal(imb) 
+[count, cells]=imhist(imc) 
+subplot(2, 2, 2) 
+bar(cells, count) 
+title('After equalization')
+
+//PART B (Without Matlab) 
+imb=imread("C:\Users\CSLab\Downloads\img1.jpg") 
+imb=rgb2gray(imb) 
+imb=imresize(imb, [100, 100]) 
+imb=uint16(imb) 
+[r, c]=size(imb) 
+freqn=zeros(1, 256); 
+for i=1:r 
+    for j=1:c 
+        freqn(imb(i, j)+1)=freqn(imb(i, j)+1)+1; 
+    end 
+end 
+subplot(2, 2, 3) 
+bar(0:255, freqn, "black");
