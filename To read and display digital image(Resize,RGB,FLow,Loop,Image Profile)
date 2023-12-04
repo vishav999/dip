@@ -57,4 +57,54 @@ subplot(2,2,2)
 improfile(im2)
 
 g. Separate color image in three R G & B planes
+im=imread("untitled.jpg"); 
+[r,c]=size(im);
+rim=zeros(r,c,3,'uint8'); 
+bim=zeros(r,c,3,'uint8'); 
+gim=zeros(r,c,3,'uint8'); 
+rim(:,:,1)=im(:,:,1); 
+gim(:,:,2)=im(:,:,2); 
+bim(:,:,3)=im(:,:,3); 
+figure; 
+subplot(2,3,1) 
+imshow(im) 
+subplot(2,3,2) 
+imshow(uint8(rim)) 
+subplot(2,3,3) 
+imshow(uint8(gim)) 
+subplot(2,3,4) 
+imshow(uint8(bim)) 
+im2=cat(3,rim(:,:,1),gim(:,:,2),bim(:,:,3)) 
+subplot(2,3,5) 
+imshow(uint8(im2))
 
+h. Create color image using R, G and B three separate planes
+im=imread("untitled.jpg");
+[r,c]=size(im);
+rim=zeros(r,c,3,'uint8');
+bim=zeros(r,c,3,'uint8');
+gim=zeros(r,c,3,'uint8');
+rim(:,:,1)=im(:,:,1);
+gim(:,:,2)=im(:,:,2);
+bim(:,:,3)=im(:,:,3);
+figure;
+subplot(2,2,1)
+imshow(im)
+subplot(2,2,2)
+imshow(uint8(rim))
+subplot(2,2,3)
+imshow(uint8(gim))
+subplot(2,2,4)
+imshow(uint8(bim))
+
+i. Flow control and LOOP in SCILAB
+Theory
+
+j. Write given 2-D data in image file
+% Create a sample 2D matrix (replace this with your actual data)
+data = rand(100, 100);  % Replace with your 2D data
+file_path = 'path_to_save_image.png';  % Change 'path_to_save_image.png' to your desired file path and name
+% Normalize the data to the range [0, 255] if necessary (assuming the data is in the range [0, 1])
+normalized_data = uint8(data * 255);
+% Save the 2D data as an image
+imwrite(normalized_data, file_path);
