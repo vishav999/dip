@@ -1,0 +1,60 @@
+To read and display digital image(Resize,RGB,FLow,Loop,Image Profile):
+
+b. Read and display image in SCILAB
+im=imread('path')
+imshow(im)
+
+c. Resize given image
+co=imread("colours.jpg");
+co1=imresize(co,1.5);
+co2=imresize(co,1.5,"bilinear");
+co3=imresize(co,[100,200],'bicubic');
+subplot(2,2,1);
+imshow(co);
+subplot(2,2,2);
+imshow(co1);
+subplot(2,2,3);
+imshow(co2);
+subplot(2,2,4);
+imshow(co3)
+
+d. Convert given color image into gray-scale image
+(With function)
+co=imread("colours.jpg");
+grey= rgb2gray(co);
+subplot(2,1,1);
+imshow(co);
+subplot(2,1,2);
+imshow(grey);
+
+(With loop)
+co=imread("drape.jpg")
+x=size(co);
+R= co(:,:,1);
+G= co(:,:,2);
+B= co(:,:,3);
+M=x(1);
+N=x(2);
+grey=zeros(M,N,'uint8');
+for i=1:M
+    for j=1:N
+        grey(i,j)= int(double(R(i,j))*0.299)+int(double(G(i,j))*0.587)+int(double(B(i,j))*0.114);     
+    end
+end
+imwrite(grey,"newgray.png")
+c=imread("newgray.png")
+imshow(c)
+
+e. Convert given color/gray-scale image into black
+Same as above
+
+f. Draw image profile
+im=imread("drape.jpg");
+subplot(2,2,1)
+improfile(im);
+im2=rgb2gray(im)
+subplot(2,2,2)
+improfile(im2)
+
+g. Separate color image in three R G & B planes
+
