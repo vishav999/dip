@@ -1,0 +1,41 @@
+Edge detection using different edge detection mask
+
+function result = edgeDetection(image, mask) 
+    [rows, cols] = size(image); 
+    result = zeros(rows, cols); 
+    maskSize = size(mask, 1); 
+    maskCenter = floor(maskSize / 2); 
+    for i = maskCenter + 1: rows - maskCenter 
+        for j = maskCenter + 1: cols - maskCenter 
+            neighborhood = image(i - maskCenter: i + maskCenter, j - maskCenter: j + maskCenter); 
+            result(i, j) = sum(neighborhood(:) .* mask(:)); 
+        end
+    end
+end
+function main() 
+    img = imread('C:\Users\visha\Downloads\rabbit.jpg');
+    imgGray = rgb2gray(img); 
+    % Define different edge detection masks
+    sobelMaskX = [-1 0 1; -2 0 2; -1 0 1]; 
+    sobelMaskY = [-1 -2 -1; 0 0 0; 1 2 1]; 
+    prewittMaskX = [-1 0 1; -1 0 1; -1 0 1]; 
+    prewittMaskY = [-1 -1 -1; 0 0 0; 1 1 1]; 
+    robertsMaskX = [1 0; 0 -1]; 
+    robertsMaskY = [0 1; -1 0]; 
+    % Perform edge detection using different masks 
+    sobelX = edgeDetection(imgGray, sobelMaskX); 
+    sobelY = edgeDetection(imgGray, sobelMaskY); 
+    sobelEdge = sqrt(sobelX.^2 + sobelY.^2); 
+    prewittX = edgeDetection(imgGray, prewittMaskX); 
+    prewittY = edgeDetection(imgGray, prewittMaskY); 
+    prewittEdge = sqrt(prewittX.^2 + prewittY.^2); 
+    robertsX = edgeDetection(imgGray, robertsMaskX); 
+    robertsY = edgeDetection(imgGray, robertsMaskY); 
+    robertsEdge = sqrt(robertsX.^2 + robertsY.^2); 
+    % Display original and edge-detected images 
+    subplot(2, 2, 1); imshow(imgGray); title('Original Image'); 
+    subplot(2, 2, 2); imshow(sobelEdge, []); title('Sobel Edge Detection'); 
+    subplot(2, 2, 3); imshow(prewittEdge, []); title('Prewitt Edge Detection'); 
+    subplot(2, 2, 4); imshow(robertsEdge, []); title('Roberts Edge Detection'); 
+end 
+main(); 
