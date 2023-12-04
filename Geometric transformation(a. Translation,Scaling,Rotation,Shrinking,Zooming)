@@ -1,0 +1,69 @@
+Geometric transformation
+
+im=imread("colours.jpg"); 
+//Translation 
+mat=[1 0 0;... 
+    0 1 0;... 
+    70 70 1]; 
+t= imtransform(im,mat,'affine'); 
+subplot(2,2,1); 
+imshow(t); 
+title("TRANSLATION");
+
+//Scaling 
+mat=[2 0 0;... 
+    0 2 0;... 
+    0 0 1]; 
+s= imtransform(im,mat,'affine'); 
+subplot(2,2,2); 
+imshow(s); 
+title("SCALING"); 
+
+//Rotation 
+mat=[cosd(30) sind(30) 0;... 
+    -sind(30) cosd(30) 0;... 
+    0 0 1]; 
+r= imtransform(im,mat,'affine'); 
+subplot(2,2,3); 
+imshow(r); 
+title("ROTATION"); 
+
+//Zooming 
+im=imread("colours.jpg"); 
+im3=im(240:500,1:200, : ); 
+x=size(im3); 
+M=x(1); 
+N=x(2); 
+zoomed=zeros(M*2,N,3,'uint8'); 
+v=0;
+for i=1:M 
+    for j=1:N 
+        zoomed(i+v,j,:)=im3(i,j,:) 
+        zoomed(i+v+1,j,:)=im3(i,j,:) 
+    end 
+    v=v+1 
+end
+subplot(1,2,1); 
+title("Original Image"); 
+imshow(im3); 
+subplot(1,2,2); 
+title("Zoomed Image"); 
+imshow(zoomed); 
+//figure(); 
+//im4=im2(100,257,80,240); 
+//zoom_rect(x,(im4)); 
+
+//Shrinking 
+% Load the image ('rabbit.jpg' ) 
+originalImage = imread('path_to_your_image.jpg'); 
+subplot(1, 2, 1); 
+imshow(originalImage); 
+title('Original Image'); 
+% Shrink the image by a factor of 2 
+shrinkFactor = 2; 
+shrunkImage = imresize(originalImage, 1/shrinkFactor); 
+% Display the shrunk image 
+subplot(1, 2, 2); 
+imshow(shrunkImage); 
+title('Shrunk Image'); 
+imwrite(shrunkImage, 'rabbit.png');
